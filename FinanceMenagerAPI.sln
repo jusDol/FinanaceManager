@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceMenagerAPI", "FinanceMenagerAPI\FinanceMenagerAPI.csproj", "{BF3C90A9-BDFB-4176-9EC9-4544C6220CCD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BF3C90A9-BDFB-4176-9EC9-4544C6220CCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF3C90A9-BDFB-4176-9EC9-4544C6220CCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF3C90A9-BDFB-4176-9EC9-4544C6220CCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF3C90A9-BDFB-4176-9EC9-4544C6220CCD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E56F6B6D-305A-43C9-B694-8CBEE9B1C332}
+	EndGlobalSection
+EndGlobal
