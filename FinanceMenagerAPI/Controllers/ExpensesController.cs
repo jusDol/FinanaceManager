@@ -1,10 +1,12 @@
 ﻿using FinanceMenagerAPI.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinanceMenagerAPI.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/[controller]")]
     public class ExpensesController :ControllerBase
     {
