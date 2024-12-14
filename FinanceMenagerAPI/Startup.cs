@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using FinanceMenagerAPI.Controllers;
 
 namespace FinanceMenagerAPI
 {
@@ -41,6 +42,7 @@ namespace FinanceMenagerAPI
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                 };
             });
+            services.AddScoped<CategoryManager>();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -50,6 +52,7 @@ namespace FinanceMenagerAPI
             }
             app.UseHttpsRedirection();
             app.UseRouting();
+
 
             app.UseAuthentication();
             app.UseAuthorization();

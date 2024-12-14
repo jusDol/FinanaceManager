@@ -28,7 +28,6 @@ namespace FinanceMenagerAPI.Controllers
                 var token = GenerateJwtToken(user.Username);
                 var refreshToken = GenerateRefreshToken();
 
-                // Dodajemy Refresh Token do listy
                 refreshTokens[refreshToken] = user.Username;
 
                 return Ok(new
@@ -44,13 +43,11 @@ namespace FinanceMenagerAPI.Controllers
         [HttpPost("refresh-token")]
         public IActionResult RefreshToken([FromBody] RefreshTokenRequest request)
         {
-            // Sprawdzanie poprawności użytkownika
             if (!ValidateUserCredentials(request.Username, request.Password))
             {
                 return Unauthorized("Invalid username or password.");
             }
 
-            // Sprawdzanie poprawności Refresh Token
             if (string.IsNullOrEmpty(request.RefreshToken) ||
                 !refreshTokens.TryGetValue(request.RefreshToken, out var storedUsername) ||
                 storedUsername != request.Username)
@@ -58,11 +55,9 @@ namespace FinanceMenagerAPI.Controllers
                 return Unauthorized("Invalid Refresh Token.");
             }
 
-            // Generowanie nowych tokenów
             var newAccessToken = GenerateJwtToken(request.Username);
             var newRefreshToken = GenerateRefreshToken();
 
-            // Aktualizacja Refresh Tokenów (usunięcie starego i dodanie nowego)
             refreshTokens.Remove(request.RefreshToken);
             refreshTokens[newRefreshToken] = request.Username;
 
@@ -75,7 +70,6 @@ namespace FinanceMenagerAPI.Controllers
 
         private bool ValidateUserCredentials(string username, string password)
         {
-            // Prosta weryfikacja - w rzeczywistości to powinno być na podstawie bazy danych
             return username == "Justyna" && password == "haslomaslo";
         }
 
@@ -112,7 +106,6 @@ namespace FinanceMenagerAPI.Controllers
         }
     }
 
-    // Model danych dla Refresh Tokena
     public class RefreshTokenRequest
     {
         public string Username { get; set; } = string.Empty;

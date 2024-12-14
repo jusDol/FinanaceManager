@@ -7,5 +7,6 @@ namespace FinanceMenagerAPI.Data
     {
         public FinanceContext(DbContextOptions<FinanceContext> options) : base(options) { }
         public DbSet<Expense> Expenses { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }
