@@ -7,9 +7,9 @@ namespace FinanceMenagerAPI.Controllers
     [Route("api/[controller]")]
     public class CategoriesController : ControllerBase
     {
-        private readonly CategoryManager _categoryManager;
+        private readonly ICategoryManager _categoryManager;
 
-        public CategoriesController(CategoryManager categoryManager)
+        public CategoriesController(ICategoryManager categoryManager)
         {
             _categoryManager = categoryManager;
         }

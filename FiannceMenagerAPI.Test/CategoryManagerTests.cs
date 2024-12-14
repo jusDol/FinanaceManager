@@ -11,40 +11,47 @@ namespace FiannceMenagerAPI.Test
 {
     public class CategoriesControllerTests
     {
-        private readonly FinanceContext _context;
-        private readonly CategoryManager _categoryManager;
-        private readonly CategoriesController _controller;
-
-        public CategoriesControllerTests()
+        [Fact]
+        public async Task GetCategories_ReturnsOkResult_WithListOfCategories()
         {
-            var options = new DbContextOptionsBuilder<FinanceContext>()
-                .UseInMemoryDatabase(databaseName: "FinanceTestDb")
-                .Options;
-            _context = new FinanceContext(options);
+            // Arrange
+            var mockCategoryManager = new Mock<ICategoryManager>();
 
-            _context.Categories.AddRange(
-                new Category { Id = 1, Name = "Category 1" },
-                new Category { Id = 2, Name = "Category 2" }
-            );
-            _context.SaveChanges();
-            _categoryManager = new CategoryManager(_context);
-            _controller = new CategoriesController(_categoryManager);
+            var categories = new List<Category>
+            {
+                new Category { Id = 1, Name = "Technology" },
+                new Category { Id = 2, Name = "Finance" }
+            };
+
+            mockCategoryManager.Setup(manager => manager.GetCategories()).ReturnsAsync(categories);
+            var controller = new CategoriesController(mockCategoryManager.Object);
+
+            // Act
+            var result = await controller.GetCategories();  
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result); 
+            var returnedCategories = Assert.IsAssignableFrom<List<Category>>(okResult.Value);  
+            Assert.Equal(categories.Count, returnedCategories.Count); 
         }
 
         [Fact]
-        public async Task GetCategories_ShouldReturnOkResultWithCategories()
+        public async Task GetCategories_ReturnsEmptyList_WhenNoCategories()
         {
+            // Arrange
+            var mockCategoryManager = new Mock<ICategoryManager>();
+
+            mockCategoryManager.Setup(manager => manager.GetCategories()).ReturnsAsync(new List<Category>());
+
+            var controller = new CategoriesController(mockCategoryManager.Object);
+
             // Act
-            var result = await _controller.GetCategories();
+            var result = await controller.GetCategories();  
 
             // Assert
-            var okResult = result as OkObjectResult;
-            Assert.NotNull(okResult);
-            var returnCategories = okResult?.Value as List<Category>;
-            Assert.NotNull(returnCategories);
-            Assert.Equal(2, returnCategories.Count);
-            Assert.Equal("Category 1", returnCategories[0].Name);
-            Assert.Equal("Category 2", returnCategories[1].Name);
+            var okResult = Assert.IsType<OkObjectResult>(result); 
+            var returnedCategories = Assert.IsAssignableFrom<List<Category>>(okResult.Value); 
+            Assert.Empty(returnedCategories);  
         }
     }
 }

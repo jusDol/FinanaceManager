@@ -4,8 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FinanceMenagerAPI.Controllers
 {
-
-    public class CategoryManager
+    public interface ICategoryManager
+    {
+        Task<List<Category>> GetCategories();
+    }
+    public class CategoryManager : ICategoryManager
     {
         private readonly FinanceContext _context;
 
