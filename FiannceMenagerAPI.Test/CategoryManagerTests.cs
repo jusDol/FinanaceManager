@@ -15,7 +15,7 @@ namespace FiannceMenagerAPI.Test
         public async Task GetCategories_ReturnsOkResult_WithListOfCategories()
         {
             // Arrange
-            var mockCategoryManager = new Mock<ICategoryManager>();
+            var mockCategoryManager = new Mock<ICategoryRepository>();
 
             var categories = new List<Category>
             {
@@ -23,7 +23,7 @@ namespace FiannceMenagerAPI.Test
                 new Category { Id = 2, Name = "Finance" }
             };
 
-            mockCategoryManager.Setup(manager => manager.GetCategories()).ReturnsAsync(categories);
+            mockCategoryManager.Setup(manager => manager.GetCategoriesAsync()).ReturnsAsync(categories);
             var controller = new CategoriesController(mockCategoryManager.Object);
 
             // Act
@@ -39,9 +39,9 @@ namespace FiannceMenagerAPI.Test
         public async Task GetCategories_ReturnsEmptyList_WhenNoCategories()
         {
             // Arrange
-            var mockCategoryManager = new Mock<ICategoryManager>();
+            var mockCategoryManager = new Mock<ICategoryRepository>();
 
-            mockCategoryManager.Setup(manager => manager.GetCategories()).ReturnsAsync(new List<Category>());
+            mockCategoryManager.Setup(manager => manager.GetCategoriesAsync()).ReturnsAsync(new List<Category>());
 
             var controller = new CategoriesController(mockCategoryManager.Object);
 

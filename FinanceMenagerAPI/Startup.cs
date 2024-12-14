@@ -42,7 +42,7 @@ namespace FinanceMenagerAPI
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                 };
             });
-            services.AddScoped<ICategoryManager, CategoryManager>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

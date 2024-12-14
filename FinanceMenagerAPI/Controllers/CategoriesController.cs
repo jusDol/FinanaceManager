@@ -7,9 +7,9 @@ namespace FinanceMenagerAPI.Controllers
     [Route("api/[controller]")]
     public class CategoriesController : ControllerBase
     {
-        private readonly ICategoryManager _categoryManager;
+        private readonly ICategoryRepository _categoryManager;
 
-        public CategoriesController(ICategoryManager categoryManager)
+        public CategoriesController(ICategoryRepository categoryManager)
         {
             _categoryManager = categoryManager;
         }
@@ -17,7 +17,7 @@ namespace FinanceMenagerAPI.Controllers
         [HttpGet("get-categories")]
         public async Task<IActionResult> GetCategories()
         {
-            var categories = await _categoryManager.GetCategories();
+            var categories = await _categoryManager.GetCategoriesAsync();
             return Ok(categories);
         }
     }
